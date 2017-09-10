@@ -21,7 +21,7 @@ import android.widget.Toast;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    EditText note_id,title,note;
+    EditText note_id, title, note;
     ListView listView;
     List<note> mylist;
     DatabaseHandler db;
@@ -40,15 +40,13 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_item);
         db = new DatabaseHandler(this);
 
-
         load();
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            startActivity(new Intent(getApplicationContext(),add_new_note.class));
+                startActivity(new Intent(getApplicationContext(), add_new_note.class));
             }
         });
     }
@@ -74,16 +72,18 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void load(){
+
+    public void load() {
 
         List<note> list = db.getAllNotes();
         mylist = list;
-        adapter =new  AppAdapter();
+        adapter = new AppAdapter();
         this.listView.setAdapter(adapter);
 
-        Toast.makeText(getApplicationContext(), mylist.size()+"", Toast.LENGTH_LONG).show();
+        //  Toast.makeText(getApplicationContext(), mylist.size()+"", Toast.LENGTH_LONG).show();
 
     }
+
     class AppAdapter extends BaseAdapter {
 
         @Override
@@ -103,8 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         @Override
-        public View getView(final int position, View convertView, ViewGroup parent)
-        {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = View.inflate(getApplicationContext(),
                         R.layout.list_item, null);
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             holder.row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    note_id.setText(mylist.get(position).get_id()+"");
+                    note_id.setText(mylist.get(position).get_id() + "");
                     title.setText(mylist.get(position).get_title());
                     note.setText(mylist.get(position).get_note());
                 }
